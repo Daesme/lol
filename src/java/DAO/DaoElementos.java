@@ -110,32 +110,7 @@ public class DaoElementos {
         return respuesta;
     }
 
-    public ArrayList<Elemento> buscarPorNombre(String nombre) {
-        ArrayList<Elemento> respuesta = new ArrayList();
-        try {
-            String consulta = "select * from inventario where nombre like '%" + nombre + "%'";
-            PreparedStatement statement
-                    = this.conexion.prepareStatement(consulta);
-            ResultSet resultado = statement.executeQuery();
-            while (resultado.next()) {
-                Elemento elm = new Elemento();
-                elm.setEtiqueta(resultado.getInt("etiqueta"));
-                elm.setNombre(resultado.getString("nombre"));
-                elm.setCantidadDisponible(resultado.getInt("cantidadDisponible"));
-                elm.setUbicacion(resultado.getString("ubicacion"));
-                elm.setPropiedad(resultado.getString("propiedad"));
-                elm.setResponsable(resultado.getString("responsable"));
-                elm.setArea(resultado.getString("area"));
-                respuesta.add(elm);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoElementos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return respuesta;
-    }
-
+    
     public Elemento buscar(int etiqueta) {
         Elemento elm = null;
 
@@ -221,6 +196,33 @@ public class DaoElementos {
         }
 
         return arr;
+    }
+
+        public Elemento buscarPorNombre(String nombre) {
+        Elemento elm = null;
+
+        try {
+            String consulta = "select * from inventario where nombre = ?";
+            PreparedStatement statement
+                    = this.conexion.prepareStatement(consulta);
+
+            statement.setString(1, nombre);
+            ResultSet resultado = statement.executeQuery();
+            if (resultado.next()) {
+                elm = new Elemento();
+                elm.setEtiqueta(resultado.getInt("etiqueta"));
+                elm.setNombre(resultado.getString("nombre"));
+                elm.setCantidadDisponible(resultado.getInt("cantidadDisponible"));
+                elm.setUbicacion(resultado.getString("ubicacion"));
+                elm.setPropiedad(resultado.getString("propiedad"));
+                elm.setResponsable(resultado.getString("responsable"));
+                elm.setArea(resultado.getString("area"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoElementos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return elm;
     }
 
 }
