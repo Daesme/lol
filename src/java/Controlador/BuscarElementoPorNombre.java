@@ -25,7 +25,7 @@ import com.google.gson.Gson;
  *
  * @author maria
  */
-public class BuscarElementoPorArea extends HttpServlet {
+public class BuscarElementoPorNombre extends HttpServlet {
     
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,15 +38,17 @@ public class BuscarElementoPorArea extends HttpServlet {
          
         
         try {
-            DaoUsuario dao = new DaoUsuario();
-            
-            String json = new Gson();
+            String nombre=request.getParameter("Busqueda");
+            DaoElementos dao = new DaoElementos();
+            Elemento el = new Elemento();
+            el=dao.buscarPorNombre(nombre);
+            String json = new Gson().toJson(el);
             response.setContentType("application/json");
             response.getWriter().write(json);  
             
             
-            
-                      String Enciclopedia = request.getParameter("Enciclopedia");
+           
+            String Enciclopedia = request.getParameter("Enciclopedia");
             String Diccionarios = request.getParameter("Diccionarios");
             String Espanol = request.getParameter("Espanol");
             String Matematicas = request.getParameter("Matematicas");
@@ -219,9 +221,9 @@ public class BuscarElementoPorArea extends HttpServlet {
         } 
 
     }    catch (URISyntaxException ex) {
-             Logger.getLogger(BuscarElementoPorArea.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(BuscarElementoPorNombre.class.getName()).log(Level.SEVERE, null, ex);
          } catch (SQLException ex) {
-             Logger.getLogger(BuscarElementoPorArea.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(BuscarElementoPorNombre.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
 }
