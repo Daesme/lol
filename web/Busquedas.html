@@ -81,7 +81,16 @@
         }
 
         function Busqueda (){
-            
+            $.ajax({
+                    type: 'get'
+                   ,url: "BuscarElementoPorNombre"
+                   
+                   ,success: function(resp) {
+                                              $.each(resp, function (indice, Elemento) {
+                            $("#tabla").append($("<tr>").append(("<td>" + Elemento.etiqueta + "</td>" + "<td>" + Elemento.nombre + "</td>"+ "<td>" + Elemento.cantidadDisponible + "</td>"+ "<td>" + Elemento.ubicacion + "</td>"+ "<td>" + Elemento.propiedad + "</td>"+ "<td>" + Elemento.responsable + "</td>"+ "<td>" + Elemento.area + "</td>")))
+                        });
+                   } 
+                });
             
             
             
