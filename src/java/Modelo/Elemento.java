@@ -9,7 +9,17 @@ public class Elemento {
     String propiedad;/*Colegio o Alcaldia*/
     String responsable;/*Bibliotecólogo o docentes*/
     String area;/*Area o tipo de elemento*/
+    String colegio;
 
+    public String getColegio() {
+        return colegio;
+    }
+
+    public void setColegio(String colegio) {
+        this.colegio = colegio;
+    }
+    
+    
     public int getEtiqueta() {
         return etiqueta;
     }
@@ -68,7 +78,9 @@ public class Elemento {
 
     @Override
     public String toString() {
-        return "Elemento{" + "etiqueta=" + etiqueta + ", nombre=" + nombre + ", cantidadDisponible=" + cantidadDisponible + ", ubicacion=" + ubicacion + ", propiedad=" + propiedad + ", responsable=" + responsable + ", area=" + area + '}';
+        return "Elemento{" + "etiqueta=" + etiqueta + ", nombre=" + nombre + ", cantidadDisponible=" + cantidadDisponible + ", ubicacion=" + ubicacion + ", propiedad=" + propiedad + ", responsable=" + responsable + ", area=" + area + ", colegio=" + colegio + '}';
     }
+
+
 
 }

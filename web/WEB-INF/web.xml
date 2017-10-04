@@ -24,6 +24,15 @@
         <servlet-name>Inicio</servlet-name>
         <url-pattern>/Inicio</url-pattern>
     </servlet-mapping>
+ <servlet>
+        <servlet-name>BuscarElementoPorNombre</servlet-name>
+        <servlet-class>Controlador.BuscarElementoPorNombre</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BuscarElementoPorNombre</servlet-name>
+        <url-pattern>/BuscarElementoPorNombre</url-pattern>
+    </servlet-mapping>
+  
     <session-config>
         <session-timeout>
             30

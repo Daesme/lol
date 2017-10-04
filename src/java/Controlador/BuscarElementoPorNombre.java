@@ -35,11 +35,14 @@ public class BuscarElementoPorNombre extends HttpServlet {
             
             DaoElementos dao;
          try {
+             
+             
              dao = new DaoElementos();
-            Elemento el = new Elemento();
-            el=dao.buscarPorNombre(nombre);
-            String json = new Gson().toJson(el);
-            response.setContentType("application/json");
+             ArrayList<Elemento> c=new ArrayList<Elemento>();
+            c=dao.listarTodo();
+           
+            String json = new Gson().toJson(c);
+            response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(json);
             } catch (URISyntaxException ex) {
              Logger.getLogger(BuscarElementoPorNombre.class.getName()).log(Level.SEVERE, null, ex);
