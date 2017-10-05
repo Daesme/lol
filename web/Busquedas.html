@@ -23,7 +23,8 @@ int etiqueta;/*Número de identificación del libro o el elemento*/
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="CSS/layout.css" rel="stylesheet" type="text/css" media="all">
-        <script type="text/javascript">
+        <script type="text/javascript" src="scripts/jquery.min.js"></script>
+        <script>
             $(document).ready(function () {
                 obtenerData();
                 alert('se cargo');
@@ -37,11 +38,35 @@ int etiqueta;/*Número de identificación del libro o el elemento*/
                     , success: function (resp) {
                         $.each(resp, function (indice, Elemento) {
                             $("#tabla").append($("<tr>").append(("<td>" + Elemento.etiqueta + "</td>" + "<td>" + Elemento.nombre + "</td>" + "<td>" + Elemento.cantidadDisponible + "</td>" + "<td>" + Elemento.ubicacion + "</td>" + "<td>" + Elemento.propiedad + "</td>" + "<td>" + Elemento.responsable + "</td>" + "<td>" + Elemento.area + "</td>" + "<td>" + Elemento.colegio + "</td>")))
-                        });
+                       
+                            $('#Busqueda').keydown(function(){
+                             // alert("cc");      
+                              var nombres = $('tabla');
+                        var buscando = $(this).val();
+                        var item='';
+                        for( var i = 0; i < nombres.length; i++ ){
+                        item = $(nombres[i]).html().toLowerCase();
+                        for(var x = 0; x < item.length; x++ ){
+                        if( buscando.length == 0 || item.indexOf( buscando ) > -1 ){
+                        $(nombres[i]).parents('.item').show(); 
+              }else{
+                   $(nombres[i]).parents('.item').hide();
+              }
+          }
+     }
+  });
+                            
+                    });
 
                     }
                 });
+               
+                
             }
+            
+            
+            
+         
         </script>
     </head>
     <body id="top">
@@ -147,14 +172,10 @@ int etiqueta;/*Número de identificación del libro o el elemento*/
                             <FONT FACE="impact"  SIZE="7" COLOR="FF4500"  > Busqueda </FONT>
                             <br>
                             <br>
-                            <SELECT NAME="selCombo" SIZE=1  style="width: 800px" onChange="javascript:alert('prueba');"> 
-                                <OPTION >Busqueda por Nombre</OPTION>
-                                <OPTION >Busqueda por Id</OPTION>
-                                <OPTION >Busqueda por Etiqueta</OPTION> 
-                            </SELECT>
+                           
                             <br>
                             <br>
-                            <input name="Busqueda" class="btmspace-15" type="text" style="width: 700px"  placeholder="Busca el Library soft">
+                            <input id="Busqueda" class="btmspace-15" type="text" style="width: 700px"  placeholder="Busca el Library soft">
 
                             <table border="1" id="tabla">
                                 <thead>
